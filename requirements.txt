@@ -1,0 +1,6 @@
+# picamera2 is installed with apt (python3-picamera2), not pip - see README
+flask
+ultralytics
+opencv-python
+pydobot
+gpiozero

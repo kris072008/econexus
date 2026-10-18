@@ -107,7 +107,7 @@ What is and isn't established:
 
 - **The gate is implemented but has not been tested on the physical line.** The prototype was dismantled before a labelled run.
 - **Offline evaluation:** `notebooks/econexus_gate_evaluation.ipynb` fine-tunes YOLOv8n-cls on TrashNet and measures the gate there (see below). Results on TrashNet do not carry over automatically to the line's own camera and lighting.
-- **One IR gate, timed travel.** The paper's design uses two gates (GPIO 17 and 27); this script uses GPIO 17 and a fixed 8-second belt run to reach the pick point.
+- **One IR sensor, timed travel.** The IR sensor on GPIO 17 marks the scan point; a fixed 8-second belt run (25 mm/s) carries the item to the pick point, with no sensor confirming arrival.
 - The original demo behaviour is kept as `ROUTING_MODE = "sequence"`.
 
 ## Offline evaluation notebook

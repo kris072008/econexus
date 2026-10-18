@@ -3,7 +3,7 @@ EcoNexus district simulation (rebuilt, v2).
 
 The original SimPy model was lost; this is a new model built from the description
 in the paper, with a rate-based sorting station and the sorting rates measured
-offline on TrashNet (paper, Section V).
+offline on TrashNet (paper, Section IV).
 
 What it models
   * 12 communal hubs, each with one 660 L dry-recyclables bin with a fill sensor.
@@ -64,8 +64,7 @@ PARAMS = {
     # --- sorting station ---
     'station_hours': (6, 22),          # ASSUMED: 16 operating hours per day
     'station_items_per_hour': 800,     # design parameter, sized for utilisation below 1 (see capacity sweep)
-    # --- class mix and sorting outcomes (paper, Section V; TrashNet test sets, mean of 3 seeds) ---
-    'class_mix': {'paper': 0.395, 'plastic': 0.191, 'general': 0.415},  # TrashNet merged class shares
+    # --- sorting outcomes (paper, Section IV, Table VI; TrashNet test sets, mean of 3 seeds) ---
     'policies': {                      # share admitted to recycling, contamination of admitted
         'ungated':   {'admitted': 0.5886, 'contamination': 0.0491},
         'gated_k3':  {'admitted': 0.5342, 'contamination': 0.0181},

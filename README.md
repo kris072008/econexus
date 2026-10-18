@@ -165,7 +165,7 @@ The paper sets out the test protocol for the physical line: **at least 760 items
 These cost real bench time and are not obvious from component datasheets:
 
 - **Read the IR sensor from the Pi, not the Dobot.** The Dobot controller's own I/O returned a constant false across repeated tests. Wiring the sensor to Raspberry Pi GPIO gave a small interface that could be tested on its own.
-- **Mount the ultrasonic fill sensor on the bin rim, not the lid.** A lid-mounted sensor moves with the lid and corrupts every reading taken while the lid is moving.
+- **Mount the ultrasonic sensor on the fixed body of the bin, not the lid.** On the prototype it sits on the fixed front face of the enclosure; a lid-mounted sensor moves with the lid and corrupts every reading taken while the lid is moving.
 - **Mount the lid servo outside the bin.** A servo body inside the bin sits in the ultrasonic cone and produces constant false "full" readings.
 - **Fix the camera geometry.** A rigid printed mount means training images and live images share the same framing.
 - **Classification over detection.** YOLOv8n-cls needs only folder-per-class images (no bounding boxes) and finishes on the Pi's CPU within the belt cycle. All inference stays on the device, so the line works without a network.

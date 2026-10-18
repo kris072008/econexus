@@ -124,7 +124,7 @@ What is and isn't established:
 
 ## District simulation
 
-[`simulation/district_sim.py`](simulation/district_sim.py) is a SimPy + OR-Tools model of a district of 12 communal hubs feeding one sorting station. The original simulation code was lost; this is a **new model**, rebuilt from the paper's description with two changes: the sorting station is rate-based (items per hour), and sorting outcomes use the rates measured offline on TrashNet.
+[`simulation/district_sim.py`](simulation/district_sim.py) is a SimPy + OR-Tools model of a district of 12 simulated communal hubs (one simulated bin each) feeding one sorting station. The original simulation code was lost; this is a **new model**, rebuilt from the paper's description with two changes: the sorting station is rate-based (items per hour), and sorting outcomes use the rates measured offline on TrashNet.
 
 ```bash
 pip install simpy ortools numpy pandas
@@ -174,7 +174,7 @@ These cost real bench time and are not obvious from component datasheets:
 
 The sorting line is one part of a larger smart waste management concept:
 
-- **Instrumented bins** — Arduino-controlled, with an ultrasonic fill sensor, servo lid and red/green status LEDs, working locally even if the link to the supervisor fails.
+- **One instrumented bin** (the prototype built one) — Arduino-controlled, with an ultrasonic fill sensor, servo lid and red/green status LEDs, working locally even if the link to the supervisor fails. The district simulation models 12 such bins, one per hub; those are simulated only.
 - **District simulation** — rebuilt in this repository (see below); the original model was lost.
 - **Citizen engagement** — an Alpha Mini robot as the public-facing side of the competition entry.
 

@@ -1,7 +1,12 @@
+import csv
+import json
+import os
 import time
 import struct
 import threading
+from datetime import datetime
 import cv2
+import numpy as np
 import pydobot
 from flask import Flask, Response
 from ultralytics import YOLO
@@ -30,13 +35,41 @@ HOVER_Z     = 110.0  # Safe vertical clearance height
 # IR Sensor on GPIO 17
 sensor_camera = Button(17, pull_up=True)
 
-# 3-Step Sequence: PAPER -> PLASTIC -> GENERAL -> Repeat
+# --- ROUTING CONFIGURATION ---
+# "classifier": route each item by the classifier with the confidence gate (matches the paper)
+# "sequence"  : original demo mode, PAPER -> PLASTIC -> GENERAL -> repeat, classifier only logged
+ROUTING_MODE = "classifier"
 TARGET_SEQUENCE = ["PAPER", "PLASTIC", "GENERAL"]
 sequence_index = 0
 
+# Confidence gate (paper, Section III-D):
+#   if predicted class is PAPER or PLASTIC and confidence p < TAU -> route to GENERAL
+#   otherwise route to the predicted class.
+# Values are read from gate_config.json (produced by the evaluation notebook) if present.
+MODEL_PATH  = 'yolov8n-cls.pt'   # fallback: stock ImageNet model + keyword mapping
+TEMPERATURE = 1.0                # temperature scaling, T = 1.0 means raw softmax
+TAU         = 0.90               # gate threshold; tau* = k / (k + 1) for cost ratio k = L_c / L_r
+RECYCLABLE  = ("PAPER", "PLASTIC")
+GATE_CONFIG = 'gate_config.json'
+if os.path.exists(GATE_CONFIG):
+    with open(GATE_CONFIG) as f:
+        _cfg = json.load(f)
+    MODEL_PATH  = _cfg.get('model', MODEL_PATH)
+    TEMPERATURE = float(_cfg.get('temperature', TEMPERATURE))
+    TAU         = float(_cfg.get('threshold_tau', TAU))
+    print(f"Loaded {GATE_CONFIG}: model={MODEL_PATH}, T={TEMPERATURE:.2f}, tau={TAU:.2f}")
+
+# Per-item log for the evaluation protocol (paper, Section V-A).
+# For a labelled run, set TRUE_LABEL before each item (e.g. via the /label/<class> URL);
+# it is written to the log but never read by the routing logic.
+LOG_FILE = 'sorting_log.csv'
+true_label = ""
+
 # 1. Load YOLO Model
-print("Loading YOLO Model...")
-model = YOLO('yolov8n-cls.pt')
+print(f"Loading YOLO Model ({MODEL_PATH})...")
+model = YOLO(MODEL_PATH)
+FINE_TUNED = {n.lower() for n in model.names.values()} == {"general", "paper", "plastic"}
+print("Classifier type:", "fine-tuned 3-class" if FINE_TUNED else "ImageNet + keyword mapping")
 
 # 2. Initialize Dobot
 try:
@@ -88,6 +121,38 @@ def classify_waste(predictions):
             return "PLASTIC", pred_name
     return "GENERAL", predictions[0]
 
+def classify(image):
+    """Returns (predicted category, confidence p, raw model label)."""
+    r = model(image, imgsz=224, verbose=False)[0]
+    probs = np.clip(r.probs.data.cpu().numpy().astype(np.float64), 1e-12, 1.0)
+    # temperature scaling: softmax(log p / T)
+    z = np.log(probs) / TEMPERATURE
+    p = np.exp(z - z.max())
+    p /= p.sum()
+    if FINE_TUNED:
+        idx = int(p.argmax())
+        name = r.names[idx]
+        return name.upper(), float(p[idx]), name
+    # ImageNet fallback: first top-5 label that matches a keyword list decides the category
+    top5 = list(np.argsort(p)[::-1][:5])
+    names = [r.names[i] for i in top5]
+    category, raw = classify_waste(names)
+    return category, float(p[top5[names.index(raw)]]), raw
+
+def apply_gate(category, confidence):
+    """Confidence gate. Returns (routed category, diverted flag)."""
+    if category in RECYCLABLE and confidence < TAU:
+        return "GENERAL", True
+    return category, False
+
+def log_item(row):
+    new = not os.path.exists(LOG_FILE)
+    with open(LOG_FILE, 'a', newline='') as f:
+        w = csv.DictWriter(f, fieldnames=list(row))
+        if new:
+            w.writeheader()
+        w.writerow(row)
+
 # 3. PiCamera2 Setup with BGR native format
 print("Initializing PiCamera2...")
 picam2 = Picamera2()
@@ -101,7 +166,8 @@ latest_frame = None
 latest_jpeg = None
 lock = threading.Lock()
 
-current_label = f"Waiting for {TARGET_SEQUENCE[sequence_index]}..."
+current_label = ("Waiting for item..." if ROUTING_MODE == "classifier"
+                 else f"Waiting for {TARGET_SEQUENCE[sequence_index]}...")
 is_processing = False
 
 def camera_worker():
@@ -110,11 +176,14 @@ def camera_worker():
         frame = picam2.capture_array()
 
         h, w, _ = frame.shape
-        expected = TARGET_SEQUENCE[sequence_index]
+        if ROUTING_MODE == "classifier":
+            header = f"Mode: classifier + gate (tau={TAU:.2f}, T={TEMPERATURE:.2f})"
+        else:
+            header = f"Next Target: [{TARGET_SEQUENCE[sequence_index]}]"
 
         # Draw overlays in standard BGR (Yellow: 0, 255, 255 | Green: 0, 255, 0)
         cv2.rectangle(frame, (w//4, h//4), (3*w//4, 3*h//4), (0, 255, 255), 2)
-        cv2.putText(frame, f"Next Target: [{expected}]", (20, 40),
+        cv2.putText(frame, header, (20, 40),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 255), 2)
         cv2.putText(frame, f"Status: {current_label}", (20, 75),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
@@ -169,15 +238,14 @@ def execute_pick_and_drop(category):
         print(f"[DOBOT] Object dropped in {box_name}. Arm returned HOME.")
 
 def sorting_logic_worker():
-    global current_label, is_processing, sequence_index
+    global current_label, is_processing, sequence_index, true_label
 
     set_conveyor(CONVEYOR_SPEED, enable=True)
 
     while True:
         if sensor_camera.is_pressed and not is_processing:
             is_processing = True
-            current_target = TARGET_SEQUENCE[sequence_index]
-
+            t_start = time.time()
             print(f"\n--> [IR TRIGGER] Object detected. Centering under camera ({SETTLE_TIME_SEC}s)...")
 
             # 1. Move 1s to center item
@@ -185,46 +253,64 @@ def sorting_logic_worker():
 
             # 2. Stop conveyor for YOLO scan
             set_conveyor(0, enable=False)
-            current_label = f"Scanning [{current_target}] with YOLO..."
+            current_label = "Scanning with YOLO..."
             time.sleep(0.5)
 
             # 3. Grab snapshot and run inference
             with lock:
                 snap = latest_frame.copy() if latest_frame is not None else None
 
+            predicted, conf, raw_pred, infer_ms = "GENERAL", 0.0, "no_frame", 0.0
             if snap is not None:
                 h, w, _ = snap.shape
                 crop = snap[h//4:3*h//4, w//4:3*w//4]
-                results = model(crop, imgsz=224, verbose=False)
-                top5_ids = results[0].probs.top5
-                top_names = [results[0].names[idx] for idx in top5_ids]
-                _, raw_pred = classify_waste(top_names)
-                conf = float(results[0].probs.top1conf) * 100
-                print(f"--> [YOLO SCAN] Detected: {raw_pred} ({conf:.1f}%) | Assigned: [{current_target}]")
+                t_inf = time.time()
+                predicted, conf, raw_pred = classify(crop)
+                infer_ms = (time.time() - t_inf) * 1000
 
-            current_label = f"Identified: [{current_target}]"
+            # 4. Decide the target box
+            if ROUTING_MODE == "classifier":
+                current_target, diverted = apply_gate(predicted, conf)
+            else:
+                current_target, diverted = TARGET_SEQUENCE[sequence_index], False
+            note = " (DIVERTED by gate)" if diverted else ""
+            print(f"--> [YOLO SCAN] {raw_pred} -> {predicted} (p={conf:.2f}, {infer_ms:.0f} ms) "
+                  f"| Routed: [{current_target}]{note}")
+            current_label = f"{predicted} p={conf:.2f} -> [{current_target}]{note}"
             time.sleep(1.0)
 
-            # 4. Transport item to Dobot pickup point (8.0s)
+            # 5. Transport item to Dobot pickup point
             print(f"--> Transporting [{current_target}] to pickup zone ({TRAVEL_TIME_SEC}s)...")
             set_conveyor(CONVEYOR_SPEED, enable=True)
             sensor_camera.wait_for_release()
             time.sleep(TRAVEL_TIME_SEC)
 
-            # 5. Stop belt at pickup point
+            # 6. Stop belt at pickup point
             set_conveyor(0, enable=False)
             current_label = f"Dobot Sorting [{current_target}]..."
 
-            # 6. Execute pick and place
+            # 7. Execute pick and place
             execute_pick_and_drop(current_target)
 
-            # 7. Advance sequence
-            sequence_index = (sequence_index + 1) % len(TARGET_SEQUENCE)
-            next_target = TARGET_SEQUENCE[sequence_index]
-            print(f"--> Cycle complete! Next target: [{next_target}]")
+            # 8. Log the cycle (evaluation protocol, paper Section V-A)
+            log_item({
+                'timestamp': datetime.now().isoformat(timespec='seconds'),
+                'mode': ROUTING_MODE, 'true_class': true_label,
+                'predicted_class': predicted, 'raw_label': raw_pred,
+                'confidence': round(conf, 4), 'tau': TAU, 'temperature': TEMPERATURE,
+                'routed_class': current_target, 'diverted': int(diverted),
+                'inference_ms': round(infer_ms, 1),
+                'cycle_time_s': round(time.time() - t_start, 2),
+            })
+            true_label = ""
 
-            # 8. Resume belt
-            current_label = f"Ready for {next_target} (Belt Running...)"
+            # 9. Advance demo sequence (sequence mode only)
+            if ROUTING_MODE == "sequence":
+                sequence_index = (sequence_index + 1) % len(TARGET_SEQUENCE)
+            print("--> Cycle complete!")
+
+            # 10. Resume belt
+            current_label = "Ready for next item (Belt Running...)"
             set_conveyor(CONVEYOR_SPEED, enable=True)
             is_processing = False
 
@@ -262,6 +348,16 @@ def index():
     </body>
     </html>
     '''
+
+@app.route('/label/<cls>')
+def set_label(cls):
+    """Operator records the true class of the NEXT item (logged only, never used for routing)."""
+    global true_label
+    cls = cls.upper()
+    if cls not in ("PAPER", "PLASTIC", "GENERAL"):
+        return "Use /label/paper, /label/plastic or /label/general", 400
+    true_label = cls
+    return f"True class of next item recorded as {cls}"
 
 @app.route('/video_feed')
 def video_feed():

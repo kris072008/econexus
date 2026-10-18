@@ -4,7 +4,7 @@ A 1:20-scale automated waste-sorting line: a conveyor carries an item under a ca
 
 Built by a BEng (Hons) Robotics and Artificial Intelligence team (University of Hertfordshire, delivered at PSB Academy, Singapore) as the sorting cell of a smart waste management competition project.
 
-> **Status:** the prototype was built and demonstrated, then dismantled. This repository holds the control script that ran the line. See [What this code does and does not do](#what-this-code-does-and-does-not-do) before relying on it.
+> **Status:** the prototype was built and demonstrated, then dismantled. This repository holds the control script for the line, now with the paper's confidence gate, and a notebook that evaluates the gate offline on TrashNet. The gate has not yet been tested on the physical line.
 
 ---
 
@@ -85,17 +85,42 @@ Everything is set by constants at the top of `sorting_line.py`. Arm coordinates 
 | `HOME_POS`, `PICK_POS` | — | Arm home and belt pickup poses (X, Y, Z, R) |
 | `BOX_PAPER`, `BOX_PLASTIC`, `BOX_GENERAL` | — | Drop poses for the three boxes |
 | `HOVER_Z` | `110.0` | Safe travel height between moves |
-| `TARGET_SEQUENCE` | Paper → Plastic → General | Demo routing order (see below) |
+| `ROUTING_MODE` | `"classifier"` | `"classifier"` routes by the model with the confidence gate; `"sequence"` is the original Paper → Plastic → General demo |
+| `MODEL_PATH` | `yolov8n-cls.pt` | Classifier weights. A 3-class model (`general`, `paper`, `plastic`) is used directly; the stock ImageNet model falls back to keyword mapping |
+| `TAU` | `0.90` | Gate threshold τ. Paper or plastic predictions with confidence below τ go to General |
+| `TEMPERATURE` | `1.0` | Temperature T for calibrated confidence, softmax(log p / T) |
+| `LOG_FILE` | `sorting_log.csv` | One row per item: true class, prediction, confidence, routed box, diverted flag, inference time, cycle time |
 
-## What this code does and does not do
+If a `gate_config.json` file (written by the evaluation notebook) sits next to the script, `MODEL_PATH`, `TAU` and `TEMPERATURE` are read from it.
 
-This script is the demonstration build, and it is simpler than the design described in the accompanying paper. To be clear about the gap:
+**Labelled runs:** before placing each item, open `http://<pi-ip-address>:8000/label/paper` (or `plastic` / `general`). The true class is written to the log only; the routing logic never reads it.
 
-- **Routing follows a fixed sequence, not the classifier.** Each item is sent to the next box in `TARGET_SEQUENCE` (Paper → Plastic → General, repeating). YOLO runs on every item and its prediction and confidence are printed to the console, but that result does not choose the box.
-- **The model is the stock ImageNet-pretrained `yolov8n-cls.pt`**, not one trained on waste images. `classify_waste()` maps its top-5 ImageNet labels to Paper / Plastic / General by keyword matching.
-- **The confidence gate is not implemented here.** It is specified in the paper (next section) and is the main piece of future work.
-- **One IR gate, timed travel.** The paper's design uses two gates (scan point and pick point, GPIO 17 / 27); this script uses the gate on GPIO 17 and a fixed 8-second belt run to reach the pick point.
-- **No classification accuracy is claimed.** No labelled evaluation run was carried out before the prototype was dismantled.
+## Routing: classifier with confidence gate
+
+Each item is classified once under the camera, then routed:
+
+1. YOLOv8n-cls gives a predicted class ĉ and confidence p (optionally temperature-scaled).
+2. **If ĉ is Paper or Plastic and p < τ, the item goes to General.** Otherwise it goes to ĉ.
+3. The decision, confidence and timing are written to `sorting_log.csv`.
+
+What is and isn't established:
+
+- **The gate is implemented but has not been tested on the physical line.** The prototype was dismantled before a labelled run.
+- **Offline evaluation:** `notebooks/econexus_gate_evaluation.ipynb` fine-tunes YOLOv8n-cls on TrashNet and measures the gate there (see below). Results on TrashNet do not carry over automatically to the line's own camera and lighting.
+- **One IR gate, timed travel.** The paper's design uses two gates (GPIO 17 and 27); this script uses GPIO 17 and a fixed 8-second belt run to reach the pick point.
+- The original demo behaviour is kept as `ROUTING_MODE = "sequence"`.
+
+## Offline evaluation notebook
+
+[`notebooks/econexus_gate_evaluation.ipynb`](notebooks/econexus_gate_evaluation.ipynb) runs on free Google Colab (T4 GPU):
+
+- downloads TrashNet and merges it into paper (paper + cardboard), plastic, and general (glass + metal + trash);
+- makes stratified 70 / 15 / 15 splits, repeated over three seeds;
+- fine-tunes YOLOv8n-cls and reports the confusion matrix and per-class precision, recall and F1;
+- fits temperature scaling on the validation split only;
+- compares ungated vs gated routing at several thresholds (admitted items, stream purity, contamination, contaminants intercepted, recyclables lost, expected cost);
+- picks τ on validation for cost ratios k = 1, 3, 9 and reports it once on the held-out test split;
+- saves every table and figure and exports `econexus_yolov8n_cls_best.pt` plus `gate_config.json` for the Pi.
 
 ## The idea behind it: confidence-gated routing
 
@@ -129,12 +154,13 @@ The sorting line is one part of a larger smart waste management concept, which i
 
 ## Roadmap
 
-- [ ] Route by the classifier's output instead of the fixed sequence
-- [ ] Add the confidence gate with a configurable threshold τ
+- [x] Route by the classifier's output instead of the fixed sequence
+- [x] Add the confidence gate with a configurable threshold τ and temperature scaling
+- [x] Log true class, predicted class, confidence, routed class and cycle time per item
+- [x] Offline evaluation notebook on TrashNet
 - [ ] Train YOLOv8n-cls on waste images captured under the line's own camera
 - [ ] Add the second IR gate at the pick point in place of timed travel
-- [ ] Log true class, predicted class, confidence, routed class and cycle time per item
-- [ ] Run the labelled evaluation and produce the threshold table
+- [ ] Run the labelled evaluation on the physical line
 
 ## Team
 

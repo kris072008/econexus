@@ -122,6 +122,32 @@ What is and isn't established:
 - picks τ on validation for cost ratios k = 1, 3, 9 and reports it once on the held-out test split;
 - saves every table and figure and exports `econexus_yolov8n_cls_best.pt` plus `gate_config.json` for the Pi.
 
+## District simulation
+
+[`simulation/district_sim.py`](simulation/district_sim.py) is a SimPy + OR-Tools model of a district of 12 communal hubs feeding one sorting station. The original simulation code was lost; this is a **new model**, rebuilt from the paper's description with two changes: the sorting station is rate-based (items per hour), and sorting outcomes use the rates measured offline on TrashNet.
+
+```bash
+pip install simpy ortools numpy pandas
+python simulation/district_sim.py            # 10 seeds, about 3 minutes plus a capacity sweep
+```
+
+It writes `simulation/results/`: per-run results (`runs.csv`), summary tables (`table_collection.csv`, `table_sorting_policies.csv`, `table_capacity_sweep.csv`) and `run_info.json` with every parameter. Each run lasts 120 days; the first 30 are discarded as warm-up, and results are mean ± standard deviation over 10 seeds. All four collection strategies see the same generated waste in each seed.
+
+**Collection strategies:** fixed 3×/week (Mon/Wed/Fri), fixed daily, naive fill-based (collect only hubs ≥ 60% full), and fill-based with co-collection (a hub ≥ 60% triggers a trip that also empties hubs ≥ 30%).
+
+**Main results** (per 30 days, mean ± sd over 10 seeds):
+
+| Strategy | Distance (km) | CO₂ (kg) | Overflow hub-days |
+|---|---|---|---|
+| Fixed 3×/week | 119.1 ± 0.0 | 320.4 ± 0.0 | 10.8 ± 3.3 |
+| Fixed daily | 274.8 ± 0.0 | 739.4 ± 0.0 | 0.0 ± 0.0 |
+| Fill-based, naive | 211.9 ± 3.5 | 570.1 ± 9.4 | 5.8 ± 1.8 |
+| Fill-based, co-collection | 136.9 ± 4.8 | 368.4 ± 12.9 | 0.9 ± 0.7 |
+
+Fill-based collection with co-collection nearly removes overflow compared with the 3×/week schedule, but drives about 15% further; it halves distance compared with daily collection. A station at 800 items/hour (offered load ρ ≈ 0.65) reaches a steady state; at 450 items/hour (ρ ≈ 1.16) the backlog grows without limit.
+
+**Assumptions:** every parameter is listed in `PARAMS` at the top of the script with its source (NEA, SingStat, US EPA, Sousa et al. 2023, IPCC 2006) or marked `ASSUMED`. Sorting outcomes are inputs taken from the TrashNet evaluation, so the simulation scales them to district volumes but does not validate them.
+
 ## The idea behind it: confidence-gated routing
 
 Recycling streams lose value mainly through contamination. One wrong item in a recycling load can down-grade the whole load, while a recyclable sent to general waste costs only that one item. The two kinds of sorting error do not cost the same, yet classifiers are usually tuned for plain top-1 accuracy, which treats them as equal.
@@ -132,13 +158,13 @@ The proposed policy, with predicted class ĉ and softmax confidence p:
 
 The point is not that a gated system classifies better, but that it **fails more cheaply**: when unsure, it declines to guess. Whether that pays off depends on whether wrong predictions really do sit at low confidence, which has to be measured. Modern networks are known to be overconfident, so calibration (for example temperature scaling) may be needed first.
 
-The paper sets out the test protocol: at least 30 items (10 or more per class), ground truth logged but never read by the routing logic, and a table per candidate threshold of items admitted, stream purity, contaminants caught and recyclables lost.
+The paper sets out the test protocol for the physical line: **at least 760 items** (about 300 paper, 145 plastic, 315 general), sized from the offline rates so that ungated contamination is estimated within ±2 percentage points and there are enough contaminants (~22) to estimate how many the gate intercepts. Ground truth is logged but never read by the routing logic, and each candidate threshold gets a table of items admitted, stream purity, contaminants caught and recyclables lost.
 
 ## Engineering findings from the build
 
 These cost real bench time and are not obvious from component datasheets:
 
-- **Read the IR gates from the Pi, not the Dobot.** The Dobot controller's own I/O returned a constant false across repeated tests. Wiring the sensor to Raspberry Pi GPIO gave a small interface that could be tested on its own.
+- **Read the IR sensor from the Pi, not the Dobot.** The Dobot controller's own I/O returned a constant false across repeated tests. Wiring the sensor to Raspberry Pi GPIO gave a small interface that could be tested on its own.
 - **Mount the ultrasonic fill sensor on the bin rim, not the lid.** A lid-mounted sensor moves with the lid and corrupts every reading taken while the lid is moving.
 - **Mount the lid servo outside the bin.** A servo body inside the bin sits in the ultrasonic cone and produces constant false "full" readings.
 - **Fix the camera geometry.** A rigid printed mount means training images and live images share the same framing.
@@ -146,10 +172,10 @@ These cost real bench time and are not obvious from component datasheets:
 
 ## The wider project
 
-The sorting line is one part of a larger smart waste management concept, which is not in this repository:
+The sorting line is one part of a larger smart waste management concept:
 
 - **Instrumented bins** — Arduino-controlled, with an ultrasonic fill sensor, servo lid and red/green status LEDs, working locally even if the link to the supervisor fails.
-- **District simulation** — a SimPy model of twelve communal hubs with OR-Tools collection routing. Its single 30-day run mainly showed that a per-item sorting cell at prototype speed cannot keep up with a district, so a rate-based sorting model is needed before collection cost can be estimated.
+- **District simulation** — rebuilt in this repository (see below); the original model was lost.
 - **Citizen engagement** — an Alpha Mini robot as the public-facing side of the competition entry.
 
 ## Roadmap
@@ -159,7 +185,8 @@ The sorting line is one part of a larger smart waste management concept, which i
 - [x] Log true class, predicted class, confidence, routed class and cycle time per item
 - [x] Offline evaluation notebook on TrashNet
 - [ ] Train YOLOv8n-cls on waste images captured under the line's own camera
-- [ ] Add the second IR gate at the pick point in place of timed travel
+- [x] Rebuilt district simulation with a rate-based sorting station
+- [ ] Add a second IR sensor at the pick point in place of timed travel
 - [ ] Run the labelled evaluation on the physical line
 
 ## Team
@@ -167,7 +194,7 @@ The sorting line is one part of a larger smart waste management concept, which i
 Krishna Mahajan, Ayyappan, Seenivasan and Gokulkanan — BEng (Hons) Robotics and Artificial Intelligence, University of Hertfordshire at PSB Academy, Singapore.
 Project supervisor: Hanafi, Lab Engineer (Robotics and AI), PSB Academy.
 
-Accompanying paper (draft, unpublished): *Confidence-Gated Edge Classification for Robotic Waste Sorting: An Architecture and Design Study.*
+Accompanying paper (draft, unpublished): *Confidence-Gated Edge Classification for Robotic Waste Sorting: Architecture, Prototype and Offline Evaluation.*
 
 ## References
 
@@ -177,3 +204,4 @@ Accompanying paper (draft, unpublished): *Confidence-Gated Edge Classification f
 4. Geifman, Y., El-Yaniv, R. *Selective Classification for Deep Neural Networks.* NeurIPS.
 5. Guo, C., Pleiss, G., Sun, Y., Weinberger, K. *On Calibration of Modern Neural Networks.* ICML.
 6. Google OR-Tools.
+7. SimPy: discrete-event simulation for Python.

@@ -1,0 +1,13 @@
+strategy,policy,recovered_kg_per30d,contamination_%
+fixed_3x,ungated,"5,552.3 ± 103.7",4.93 ± 0.03
+fixed_3x,gated_k3,"5,203.7 ± 98.5",1.81 ± 0.01
+fixed_3x,gated_k9,"4,824.8 ± 90.4",0.85 ± 0.01
+fixed_daily,ungated,"5,631.1 ± 109.3",4.93 ± 0.03
+fixed_daily,gated_k3,"5,279.0 ± 107.6",1.81 ± 0.02
+fixed_daily,gated_k9,"4,893.3 ± 97.8",0.85 ± 0.01
+fill_naive,ungated,"5,609.4 ± 107.9",4.93 ± 0.03
+fill_naive,gated_k3,"5,259.5 ± 103.3",1.81 ± 0.02
+fill_naive,gated_k9,"4,874.3 ± 91.6",0.85 ± 0.01
+fill_based,ungated,"5,627.9 ± 123.2",4.92 ± 0.03
+fill_based,gated_k3,"5,276.8 ± 120.8",1.81 ± 0.02
+fill_based,gated_k9,"4,891.7 ± 112.2",0.85 ± 0.01

@@ -227,6 +227,8 @@ python experiments/analyze.py --preds experiments/preds --out experiments/result
 - **Shift test:** every TrashNet model is applied to RealWaste (landfill images), with TrashNet calibration and with an oracle recalibration on 20% of RealWaste.
 - `experiments/preds/` holds the saved predictions (image paths relative to the data folder), so `analyze.py` reproduces every table and figure without retraining. `experiments/results/summary.json` has every number quoted in the paper.
 
+**Fine-tuning on target images:** `experiments/adapt_realwaste.py` fine-tunes each TrashNet model on 10% or 20% of RealWaste (475 or 951 images), calibrates on another 10% and evaluates on a fixed 60%, with τ = k/(k+1); `experiments/dupcheck_realwaste.py` checks for near-duplicates across datasets and between fine-tuning and evaluation images. Results are in `experiments/adapt/` (`--analyze-only` reproduces the tables from the saved predictions).
+
 The simulation also gained `simulation/market_model.py` (bales rejected above a contamination limit, priced with 2025 US bale prices and the NEA disposal fee) and `simulation/sensitivity.py` (one-at-a-time sensitivity of the collection results). Run them after `district_sim.py --policies experiments/results/policy_rates.json`.
 
 ## License

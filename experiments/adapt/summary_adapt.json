@@ -1,0 +1,263 @@
+{
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "epochs": 15,
+  "n_eval": 2851,
+  "n_cal": 475,
+  "n_train": {
+    "10": 475,
+    "20": 951
+  },
+  "stats": {
+    "all_f10": {
+      "accuracy_%": {
+        "mean": 38.119957909505445,
+        "ci95": [
+          1.73744966583822,
+          74.50246615317266
+        ],
+        "p": 0.04189614419735431
+      },
+      "ungated_contamination_%": {
+        "mean": -48.36305151300447,
+        "ci95": [
+          -74.65717770526436,
+          -22.068925320744583
+        ],
+        "p": 0.0024447736088053823
+      },
+      "k9_contamination_%": {
+        "mean": NaN,
+        "ci95": [
+          NaN,
+          NaN
+        ],
+        "p": NaN
+      },
+      "ECE_%": {
+        "mean": -3.401915538749691,
+        "ci95": [
+          -17.9773567768669,
+          11.173525699367515
+        ],
+        "p": 0.610276055098075
+      }
+    },
+    "all_f20": {
+      "accuracy_%": {
+        "mean": 41.245177130831294,
+        "ci95": [
+          16.23119591234533,
+          66.25915834931726
+        ],
+        "p": 0.004697200187777183
+      },
+      "ungated_contamination_%": {
+        "mean": -51.798594799094744,
+        "ci95": [
+          -71.76259263828779,
+          -31.8345969599017
+        ],
+        "p": 0.0002379439502956918
+      },
+      "k9_contamination_%": {
+        "mean": NaN,
+        "ci95": [
+          NaN,
+          NaN
+        ],
+        "p": NaN
+      },
+      "ECE_%": {
+        "mean": -3.4972414310730757,
+        "ci95": [
+          -12.57902346167901,
+          5.58454059953286
+        ],
+        "p": 0.4063257856011087
+      }
+    },
+    "matched_f10": {
+      "accuracy_%": {
+        "mean": 31.37145513714551,
+        "ci95": [
+          0.42487946552403955,
+          62.31803080876698
+        ],
+        "p": 0.04752401914485807
+      },
+      "ungated_contamination_%": {
+        "mean": -41.13811318653403,
+        "ci95": [
+          -70.58603417904818,
+          -11.690192194019875
+        ],
+        "p": 0.011546782883627718
+      },
+      "k9_contamination_%": {
+        "mean": NaN,
+        "ci95": [
+          NaN,
+          NaN
+        ],
+        "p": NaN
+      },
+      "ECE_%": {
+        "mean": -2.0308703810876017,
+        "ci95": [
+          -15.27881921741335,
+          11.217078455238145
+        ],
+        "p": 0.7367255180269159
+      }
+    },
+    "matched_f20": {
+      "accuracy_%": {
+        "mean": 35.16503951650395,
+        "ci95": [
+          13.879138054239856,
+          56.450940978768045
+        ],
+        "p": 0.004645805704887792
+      },
+      "ungated_contamination_%": {
+        "mean": -43.95928690216532,
+        "ci95": [
+          -67.1260650660709,
+          -20.792508738259745
+        ],
+        "p": 0.0020127478866369987
+      },
+      "k9_contamination_%": {
+        "mean": NaN,
+        "ci95": [
+          NaN,
+          NaN
+        ],
+        "p": NaN
+      },
+      "ECE_%": {
+        "mean": -2.0232511795593195,
+        "ci95": [
+          -9.698920851912892,
+          5.652418492794253
+        ],
+        "p": 0.5656764672748094
+      }
+    }
+  },
+  "table": [
+    {
+      "subset": "all",
+      "fine-tuning data (% of RealWaste)": 0,
+      "splits": 10,
+      "T": "8.44 \u00b1 2.55",
+      "accuracy (%)": "46.8 \u00b1 6.2",
+      "ECE (%)": "5.3 \u00b1 2.7",
+      "NLL": "0.985 \u00b1 0.048",
+      "ungated contamination (%)": "67.8 \u00b1 4.4",
+      "k=3 contamination (%)": "14.5 \u00b1 5.5",
+      "k=3 admitted (%)": "4.2 \u00b1 2.9",
+      "k=3 cost / ungated": "0.27 \u00b1 0.04",
+      "k=9 contamination (%)": "2.9 \u00b1 4.2",
+      "k=9 admitted (%)": "0.7 \u00b1 0.7",
+      "k=9 cost / ungated": "0.10 \u00b1 0.01",
+      "TrashNet test accuracy (%)": "95.3 \u00b1 1.1"
+    },
+    {
+      "subset": "all",
+      "fine-tuning data (% of RealWaste)": 10,
+      "splits": 10,
+      "T": "1.92 \u00b1 0.21",
+      "accuracy (%)": "84.9 \u00b1 1.2",
+      "ECE (%)": "1.9 \u00b1 0.5",
+      "NLL": "0.389 \u00b1 0.018",
+      "ungated contamination (%)": "19.5 \u00b1 1.9",
+      "k=3 contamination (%)": "8.4 \u00b1 0.9",
+      "k=3 admitted (%)": "24.6 \u00b1 2.0",
+      "k=3 cost / ungated": "0.77 \u00b1 0.04",
+      "k=9 contamination (%)": "3.3 \u00b1 0.9",
+      "k=9 admitted (%)": "16.1 \u00b1 2.3",
+      "k=9 cost / ungated": "0.39 \u00b1 0.04",
+      "TrashNet test accuracy (%)": "74.4 \u00b1 3.1"
+    },
+    {
+      "subset": "all",
+      "fine-tuning data (% of RealWaste)": 20,
+      "splits": 10,
+      "T": "1.80 \u00b1 0.19",
+      "accuracy (%)": "88.0 \u00b1 0.7",
+      "ECE (%)": "1.8 \u00b1 1.0",
+      "NLL": "0.311 \u00b1 0.011",
+      "ungated contamination (%)": "16.0 \u00b1 1.5",
+      "k=3 contamination (%)": "6.9 \u00b1 1.1",
+      "k=3 admitted (%)": "28.7 \u00b1 1.3",
+      "k=3 cost / ungated": "0.76 \u00b1 0.05",
+      "k=9 contamination (%)": "2.6 \u00b1 0.7",
+      "k=9 admitted (%)": "21.1 \u00b1 1.8",
+      "k=9 cost / ungated": "0.39 \u00b1 0.05",
+      "TrashNet test accuracy (%)": "75.1 \u00b1 3.4"
+    },
+    {
+      "subset": "matched",
+      "fine-tuning data (% of RealWaste)": 0,
+      "splits": 10,
+      "T": "8.44 \u00b1 2.55",
+      "accuracy (%)": "50.0 \u00b1 5.3",
+      "ECE (%)": "4.2 \u00b1 2.2",
+      "NLL": "0.973 \u00b1 0.046",
+      "ungated contamination (%)": "58.2 \u00b1 5.5",
+      "k=3 contamination (%)": "13.1 \u00b1 5.2",
+      "k=3 admitted (%)": "5.5 \u00b1 3.8",
+      "k=3 cost / ungated": "0.40 \u00b1 0.05",
+      "k=9 contamination (%)": "2.9 \u00b1 4.2",
+      "k=9 admitted (%)": "0.9 \u00b1 1.0",
+      "k=9 cost / ungated": "0.14 \u00b1 0.02",
+      "TrashNet test accuracy (%)": ""
+    },
+    {
+      "subset": "matched",
+      "fine-tuning data (% of RealWaste)": 10,
+      "splits": 10,
+      "T": "1.92 \u00b1 0.21",
+      "accuracy (%)": "81.4 \u00b1 1.6",
+      "ECE (%)": "2.1 \u00b1 0.5",
+      "NLL": "0.464 \u00b1 0.020",
+      "ungated contamination (%)": "17.0 \u00b1 2.2",
+      "k=3 contamination (%)": "7.2 \u00b1 1.1",
+      "k=3 admitted (%)": "32.2 \u00b1 2.7",
+      "k=3 cost / ungated": "0.83 \u00b1 0.05",
+      "k=9 contamination (%)": "2.5 \u00b1 0.9",
+      "k=9 admitted (%)": "21.2 \u00b1 3.0",
+      "k=9 cost / ungated": "0.44 \u00b1 0.05",
+      "TrashNet test accuracy (%)": ""
+    },
+    {
+      "subset": "matched",
+      "fine-tuning data (% of RealWaste)": 20,
+      "splits": 10,
+      "T": "1.80 \u00b1 0.19",
+      "accuracy (%)": "85.2 \u00b1 0.9",
+      "ECE (%)": "2.1 \u00b1 0.8",
+      "NLL": "0.374 \u00b1 0.012",
+      "ungated contamination (%)": "14.2 \u00b1 1.2",
+      "k=3 contamination (%)": "6.0 \u00b1 1.0",
+      "k=3 admitted (%)": "37.6 \u00b1 1.6",
+      "k=3 cost / ungated": "0.81 \u00b1 0.05",
+      "k=9 contamination (%)": "2.1 \u00b1 0.5",
+      "k=9 admitted (%)": "27.8 \u00b1 2.4",
+      "k=9 cost / ungated": "0.43 \u00b1 0.05",
+      "TrashNet test accuracy (%)": ""
+    }
+  ]
+}

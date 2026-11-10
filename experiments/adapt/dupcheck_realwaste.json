@@ -1,0 +1,63 @@
+{
+  "realwaste_vs_trashnet": {
+    "realwaste_images": 4752,
+    "trashnet_images": 2527,
+    "near_duplicates": 21
+  },
+  "within_realwaste": {
+    "adapt_seed0_f20": {
+      "eval": 2851,
+      "train": 951,
+      "near_duplicates": 2
+    },
+    "adapt_seed1_f20": {
+      "eval": 2851,
+      "train": 951,
+      "near_duplicates": 7
+    },
+    "adapt_seed2_f20": {
+      "eval": 2851,
+      "train": 951,
+      "near_duplicates": 4
+    },
+    "adapt_seed3_f20": {
+      "eval": 2851,
+      "train": 951,
+      "near_duplicates": 9
+    },
+    "adapt_seed4_f20": {
+      "eval": 2851,
+      "train": 951,
+      "near_duplicates": 8
+    },
+    "adapt_seed5_f20": {
+      "eval": 2851,
+      "train": 951,
+      "near_duplicates": 11
+    },
+    "adapt_seed6_f20": {
+      "eval": 2851,
+      "train": 951,
+      "near_duplicates": 5
+    },
+    "adapt_seed7_f20": {
+      "eval": 2851,
+      "train": 951,
+      "near_duplicates": 4
+    },
+    "adapt_seed8_f20": {
+      "eval": 2851,
+      "train": 951,
+      "near_duplicates": 6
+    },
+    "adapt_seed9_f20": {
+      "eval": 2851,
+      "train": 951,
+      "near_duplicates": 6
+    }
+  },
+  "within_realwaste_total": {
+    "near_duplicates": 62,
+    "eval_images": 28510
+  }
+}

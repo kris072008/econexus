@@ -206,6 +206,29 @@ Accompanying paper (draft, unpublished): *Confidence-Gated Edge Classification f
 6. Google OR-Tools.
 7. SimPy: discrete-event simulation for Python.
 
+## Experiments for the revised paper (10 splits, baselines, dataset shift)
+
+`experiments/` replaces the three-seed Colab run with a fuller evaluation that runs locally (it was run on an Apple M4; versions in `requirements-experiments.txt`):
+
+```bash
+pip install -r requirements-experiments.txt
+# TrashNet: github.com/garythung/trashnet (data/dataset-resized.zip); RealWaste: archive.ics.uci.edu/dataset/908/realwaste
+python experiments/train_predict.py --trashnet DATA/trashnet/dataset-resized \
+    --realwaste DATA/realwaste/realwaste-main/RealWaste --out experiments/preds_raw --seeds 0-9 --members 1
+python experiments/train_predict.py ... --seeds 0-4 --members 5          # extra models for the 5-model ensembles
+python experiments/predict_last.py --preds experiments/preds_raw --work experiments/work --out experiments/preds
+python experiments/dupcheck.py --preds experiments/preds --data-root DATA   # train/test near-duplicate check
+python experiments/analyze.py --preds experiments/preds --out experiments/results
+```
+
+- **10 random 70/15/15 splits** of TrashNet; the model after the final epoch is used, so the validation split is only used to fit the temperature and choose thresholds.
+- **Baselines:** τ = k/(k+1) with no tuning, tuned max-softmax (raw and temperature-scaled), margin, entropy, per-stream thresholds, split-conformal sets, a Learn-then-Test style risk-controlled threshold and 5-model deep ensembles.
+- **Statistics:** the splits overlap, so gated-vs-ungated differences use the corrected resampled t-test of Nadeau and Bengio (2003).
+- **Shift test:** every TrashNet model is applied to RealWaste (landfill images), with TrashNet calibration and with an oracle recalibration on 20% of RealWaste.
+- `experiments/preds/` holds the saved predictions (image paths relative to the data folder), so `analyze.py` reproduces every table and figure without retraining. `experiments/results/summary.json` has every number quoted in the paper.
+
+The simulation also gained `simulation/market_model.py` (bales rejected above a contamination limit, priced with 2025 US bale prices and the NEA disposal fee) and `simulation/sensitivity.py` (one-at-a-time sensitivity of the collection results). Run them after `district_sim.py --policies experiments/results/policy_rates.json`.
+
 ## License
 
 The code in this repository is released under the [MIT License](LICENSE).

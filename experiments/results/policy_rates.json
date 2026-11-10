@@ -1,0 +1,29 @@
+{
+  "ungated": {
+    "admitted": 0.5831578947368421,
+    "contamination": 0.04332129963898917,
+    "paper_share": 0.39289473684210524,
+    "plastic_share": 0.19026315789473683,
+    "paper_contamination": 0.02679169457468185,
+    "plastic_contamination": 0.07745504840940526,
+    "pooled_items": 3800
+  },
+  "gated_k3": {
+    "admitted": 0.5468421052631579,
+    "contamination": 0.01828681424446583,
+    "paper_share": 0.37605263157894736,
+    "plastic_share": 0.17078947368421052,
+    "paper_contamination": 0.010496850944716585,
+    "plastic_contamination": 0.03543913713405239,
+    "pooled_items": 3800
+  },
+  "gated_k9": {
+    "admitted": 0.5186842105263157,
+    "contamination": 0.011669203450025367,
+    "paper_share": 0.36157894736842106,
+    "plastic_share": 0.15710526315789475,
+    "paper_contamination": 0.006550218340611353,
+    "plastic_contamination": 0.023450586264656615,
+    "pooled_items": 3800
+  }
+}

@@ -3,3 +3,6 @@ __pycache__/
 .venv/
 runs/
 sorting_log.csv
+experiments/work/
+experiments/preds_raw/
+*.pt

@@ -64,7 +64,7 @@ PARAMS = {
     # --- sorting station ---
     'station_hours': (6, 22),          # ASSUMED: 16 operating hours per day
     'station_items_per_hour': 800,     # design parameter, sized for utilisation below 1 (see capacity sweep)
-    # --- sorting outcomes (paper, Section IV, Table VI; TrashNet test sets, mean of 3 seeds) ---
+    # --- sorting outcomes (TrashNet test sets; v1 values from 3 seeds, replace with --policies) ---
     'policies': {                      # share admitted to recycling, contamination of admitted
         'ungated':   {'admitted': 0.5886, 'contamination': 0.0491},
         'gated_k3':  {'admitted': 0.5342, 'contamination': 0.0181},
@@ -249,7 +249,7 @@ def run(P, seed, strategy, router, D_km, deposits, station_rate=None):
     for name in P['policies']:
         rec = outcomes[name]['recovered'][w].sum(); con = outcomes[name]['contaminants'][w].sum()
         res[f'{name}_recovered_kg_per30d'] = rec * P['item_mass_kg'] * per30
-        res[f'{name}_contamination_%'] = 100 * con / max(rec + con, 1)
+        res[f'{name}_contamination_%'] = 100 * con / (rec + con) if rec + con else float('nan')
     return res
 
 
@@ -266,8 +266,20 @@ def main():
     ap.add_argument('--seeds', type=int, default=10)
     ap.add_argument('--quick', action='store_true', help='skip the capacity sweep')
     ap.add_argument('--out', default=os.path.join(os.path.dirname(os.path.abspath(__file__)), 'results'))
+    ap.add_argument('--policies', default=None,
+                    help='policy_rates.json from experiments/analyze.py; replaces the built-in sorting rates')
     a = ap.parse_args()
     P = PARAMS; os.makedirs(a.out, exist_ok=True)
+    if a.policies:
+        rates = json.load(open(a.policies))
+        P['policies'] = {name: {'admitted': float(rates[name]['admitted']),
+                                'contamination': float(rates[name]['contamination'])}
+                         for name in ('ungated', 'gated_k3', 'gated_k9')}
+        for name, pol in P['policies'].items():
+            if not (0 <= pol['admitted'] <= 1 and 0 <= pol['contamination'] <= 1):
+                raise SystemExit(f'{name}: rates out of range in {a.policies}')
+        P['policy_source'] = os.path.abspath(a.policies)
+        print('sorting rates from', a.policies, P['policies'])
     pts, D = layout(P); router = Router(D, P['truck_capacity_L'])
     rows, t0 = [], time.time()
     for s in range(a.seeds):

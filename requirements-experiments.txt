@@ -1,0 +1,13 @@
+# Versions used for the offline evaluation, simulation and market model in the paper (Apple M4, Python 3.14.5)
+torch==2.15.0
+torchvision==0.29.2
+ultralytics==8.4.208
+numpy==2.5.2
+pandas==3.0.5
+scipy==1.18.1
+scikit-learn==1.9.1
+matplotlib==3.11.1
+tabulate==0.10.0
+pillow==12.3.0
+simpy==4.1.2
+ortools==9.15.6755

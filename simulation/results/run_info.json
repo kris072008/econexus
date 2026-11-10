@@ -96,19 +96,20 @@
     "station_items_per_hour": 800,
     "policies": {
       "ungated": {
-        "admitted": 0.5886,
-        "contamination": 0.0491
+        "admitted": 0.5831578947368421,
+        "contamination": 0.04332129963898917
       },
       "gated_k3": {
-        "admitted": 0.5342,
-        "contamination": 0.0181
+        "admitted": 0.5468421052631579,
+        "contamination": 0.01828681424446583
       },
       "gated_k9": {
-        "admitted": 0.4904,
-        "contamination": 0.0085
+        "admitted": 0.5186842105263157,
+        "contamination": 0.011669203450025367
       }
     },
     "days": 120,
-    "warmup_days": 30
+    "warmup_days": 30,
+    "policy_source": "experiments/results/policy_rates.json"
   }
 }

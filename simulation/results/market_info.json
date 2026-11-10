@@ -1,0 +1,22 @@
+{
+  "items_processed_per30d": 251428.3125,
+  "params": {
+    "item_mass_kg": 0.04,
+    "bale_mass_kg": 500.0,
+    "contamination_limit": 0.015,
+    "variability_sigma": 0.5,
+    "disposal_usd_per_t": 68.99199999999999,
+    "rejection_penalty_usd_per_t": 0.0,
+    "price_scenarios": {
+      "low": {
+        "paper": 22.387916099999998,
+        "plastic": 118.60855599999998
+      },
+      "high": {
+        "paper": 51.6762928,
+        "plastic": 1031.982622
+      }
+    },
+    "months": 4000
+  }
+}

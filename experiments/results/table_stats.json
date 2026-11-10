@@ -1,0 +1,80 @@
+{
+  "1": {
+    "contamination_reduction_pp": {
+      "mean": 0.9822282525721093,
+      "ci95": [
+        -0.6778543671499495,
+        2.642310872294168
+      ],
+      "p_two_sided": 0.21357380044376775
+    },
+    "relative_cost_change": {
+      "mean": -0.02119588744588744,
+      "ci95": [
+        -0.09144019840875475,
+        0.04904842351697986
+      ],
+      "p_two_sided": 0.51204753202475
+    },
+    "seeds_lower_cost": 3,
+    "seeds_higher_cost": 1,
+    "pooled_descriptive": {
+      "ungated_admitted": 2216,
+      "ungated_contaminants": 96,
+      "gated_admitted": 2181,
+      "gated_contaminants": 73
+    }
+  },
+  "3": {
+    "contamination_reduction_pp": {
+      "mean": 2.477968699615231,
+      "ci95": [
+        0.9070267773221372,
+        4.048910621908324
+      ],
+      "p_two_sided": 0.006040514304568481
+    },
+    "relative_cost_change": {
+      "mean": -0.2104974449358418,
+      "ci95": [
+        -0.5186572971925882,
+        0.09766240732090467
+      ],
+      "p_two_sided": 0.15669013418799332
+    },
+    "seeds_lower_cost": 8,
+    "seeds_higher_cost": 2,
+    "pooled_descriptive": {
+      "ungated_admitted": 2216,
+      "ungated_contaminants": 96,
+      "gated_admitted": 2078,
+      "gated_contaminants": 38
+    }
+  },
+  "9": {
+    "contamination_reduction_pp": {
+      "mean": 3.1823376970787116,
+      "ci95": [
+        1.0355695920809977,
+        5.329105802076425
+      ],
+      "p_two_sided": 0.008477754685612572
+    },
+    "relative_cost_change": {
+      "mean": -0.46437557149238884,
+      "ci95": [
+        -0.7385830119236805,
+        -0.19016813106109715
+      ],
+      "p_two_sided": 0.0040215180680614054
+    },
+    "seeds_lower_cost": 10,
+    "seeds_higher_cost": 0,
+    "pooled_descriptive": {
+      "ungated_admitted": 2216,
+      "ungated_contaminants": 96,
+      "gated_admitted": 1971,
+      "gated_contaminants": 23
+    }
+  }
+}

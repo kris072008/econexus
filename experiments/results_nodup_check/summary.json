@@ -1,0 +1,1147 @@
+{
+  "excluded_near_duplicates": {
+    "0": 17,
+    "1": 23,
+    "2": 18,
+    "3": 22,
+    "4": 21,
+    "5": 22,
+    "6": 12,
+    "7": 24,
+    "8": 16,
+    "9": 24
+  },
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "ensemble_seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "accuracy": {
+    "mean": 95.3672227022177,
+    "sd": 1.1020083271352497,
+    "min": 93.13186813186813,
+    "max": 96.64804469273743
+  },
+  "plastic_f1": "92.1 \u00b1 2.1",
+  "confusion_seed0": [
+    [
+      149,
+      4,
+      2
+    ],
+    [
+      3,
+      134,
+      0
+    ],
+    [
+      6,
+      0,
+      65
+    ]
+  ],
+  "calibration": {
+    "raw softmax": {
+      "T": "1 (fixed)",
+      "NLL": "0.153 \u00b1 0.053",
+      "ECE (%)": "2.9 \u00b1 0.9",
+      "Brier": "0.071 \u00b1 0.018"
+    },
+    "temperature-scaled": {
+      "T": "1.92 \u00b1 0.18",
+      "NLL": "0.130 \u00b1 0.029",
+      "ECE (%)": "2.6 \u00b1 0.6",
+      "Brier": "0.069 \u00b1 0.015"
+    }
+  },
+  "T_values": [
+    1.97,
+    1.98,
+    1.65,
+    2.23,
+    2.17,
+    1.73,
+    1.89,
+    1.86,
+    1.81,
+    1.96
+  ],
+  "ece_improved_seeds": 6,
+  "nll_improved_seeds": 7,
+  "ensemble_vs_single": {
+    "1": {
+      "seeds": 5,
+      "contamination_diff_pp_mean": -0.5827258353031615,
+      "contamination_diff_pp_sd": 1.3869035952002267,
+      "cost_diff_mean": -2.2,
+      "cost_diff_sd": 1.3038404810405297
+    },
+    "3": {
+      "seeds": 5,
+      "contamination_diff_pp_mean": 0.32898232942853073,
+      "contamination_diff_pp_sd": 1.1121254640084681,
+      "cost_diff_mean": -2.6,
+      "cost_diff_sd": 6.4265076052238514
+    },
+    "9": {
+      "seeds": 5,
+      "contamination_diff_pp_mean": 0.10213450614588407,
+      "contamination_diff_pp_sd": 0.7320399786492335,
+      "cost_diff_mean": -3.2,
+      "cost_diff_sd": 4.919349550499538
+    }
+  },
+  "risk_feasible_fraction": 0.0,
+  "risk_test_exceeds_target": {
+    "1": 0,
+    "3": 0,
+    "9": 0
+  },
+  "conformal_coverage": [
+    [
+      0,
+      1,
+      0.055,
+      0.953168044077135
+    ],
+    [
+      0,
+      3,
+      0.035,
+      0.9944903581267218
+    ],
+    [
+      0,
+      9,
+      0.035,
+      0.9944903581267218
+    ],
+    [
+      1,
+      1,
+      0.06,
+      0.957983193277311
+    ],
+    [
+      1,
+      3,
+      0.185,
+      0.8123249299719888
+    ],
+    [
+      1,
+      9,
+      0.185,
+      0.8123249299719888
+    ],
+    [
+      2,
+      1,
+      0.05,
+      0.9723756906077348
+    ],
+    [
+      2,
+      3,
+      0.135,
+      0.9033149171270718
+    ],
+    [
+      2,
+      9,
+      0.135,
+      0.9033149171270718
+    ],
+    [
+      3,
+      1,
+      0.045,
+      0.9888268156424581
+    ],
+    [
+      3,
+      3,
+      0.095,
+      0.9329608938547486
+    ],
+    [
+      3,
+      9,
+      0.025,
+      0.9916201117318436
+    ],
+    [
+      4,
+      1,
+      0.05,
+      0.9721448467966574
+    ],
+    [
+      4,
+      3,
+      0.035,
+      0.9777158774373259
+    ],
+    [
+      4,
+      9,
+      0.035,
+      0.9777158774373259
+    ],
+    [
+      5,
+      1,
+      0.055,
+      0.9636871508379888
+    ],
+    [
+      5,
+      3,
+      0.09,
+      0.9273743016759777
+    ],
+    [
+      5,
+      9,
+      0.165,
+      0.8519553072625698
+    ],
+    [
+      6,
+      1,
+      0.065,
+      0.9211956521739131
+    ],
+    [
+      6,
+      3,
+      0.03,
+      0.9646739130434783
+    ],
+    [
+      6,
+      9,
+      0.03,
+      0.9646739130434783
+    ],
+    [
+      7,
+      1,
+      0.045,
+      0.9859550561797753
+    ],
+    [
+      7,
+      3,
+      0.035,
+      0.9915730337078652
+    ],
+    [
+      7,
+      9,
+      0.035,
+      0.9915730337078652
+    ],
+    [
+      8,
+      1,
+      0.075,
+      0.9203296703296703
+    ],
+    [
+      8,
+      3,
+      0.075,
+      0.9203296703296703
+    ],
+    [
+      8,
+      9,
+      0.075,
+      0.9203296703296703
+    ],
+    [
+      9,
+      1,
+      0.045,
+      0.9887640449438202
+    ],
+    [
+      9,
+      3,
+      0.16,
+      0.9073033707865169
+    ],
+    [
+      9,
+      9,
+      0.16,
+      0.9073033707865169
+    ]
+  ],
+  "methods": [
+    {
+      "k": 1,
+      "method": "Ungated",
+      "seeds": 10,
+      "\u03c4 (\u03b1 for conformal)": "",
+      "admitted (%)": "57.2 \u00b1 1.5",
+      "contamination (%)": "4.30 \u00b1 1.59",
+      "intercepted": "0.0 \u00b1 0.0",
+      "lost to gate": "0.0 \u00b1 0.0",
+      "cost / ungated": "1.00 \u00b1 0.00",
+      "seeds with lower cost": 0
+    },
+    {
+      "k": 1,
+      "method": "Max softmax, raw",
+      "seeds": 10,
+      "\u03c4 (\u03b1 for conformal)": "0.54 \u00b1 0.18",
+      "admitted (%)": "56.3 \u00b1 1.1",
+      "contamination (%)": "3.29 \u00b1 1.44",
+      "intercepted": "2.2 \u00b1 2.9",
+      "lost to gate": "1.0 \u00b1 1.4",
+      "cost / ungated": "0.95 \u00b1 0.07",
+      "seeds with lower cost": 5
+    },
+    {
+      "k": 1,
+      "method": "Max softmax, temperature-scaled",
+      "seeds": 10,
+      "\u03c4 (\u03b1 for conformal)": "0.42 \u00b1 0.18",
+      "admitted (%)": "56.3 \u00b1 1.4",
+      "contamination (%)": "3.29 \u00b1 1.39",
+      "intercepted": "2.2 \u00b1 3.0",
+      "lost to gate": "1.1 \u00b1 1.6",
+      "cost / ungated": "0.98 \u00b1 0.06",
+      "seeds with lower cost": 3
+    },
+    {
+      "k": 1,
+      "method": "Margin (top-1 \u2212 top-2)",
+      "seeds": 10,
+      "\u03c4 (\u03b1 for conformal)": "0.12 \u00b1 0.09",
+      "admitted (%)": "56.2 \u00b1 1.1",
+      "contamination (%)": "3.30 \u00b1 1.41",
+      "intercepted": "2.2 \u00b1 2.7",
+      "lost to gate": "1.5 \u00b1 1.6",
+      "cost / ungated": "0.99 \u00b1 0.11",
+      "seeds with lower cost": 4
+    },
+    {
+      "k": 1,
+      "method": "1 \u2212 normalised entropy",
+      "seeds": 10,
+      "\u03c4 (\u03b1 for conformal)": "0.15 \u00b1 0.13",
+      "admitted (%)": "56.1 \u00b1 1.5",
+      "contamination (%)": "3.36 \u00b1 1.12",
+      "intercepted": "2.1 \u00b1 3.3",
+      "lost to gate": "1.9 \u00b1 2.8",
+      "cost / ungated": "1.03 \u00b1 0.10",
+      "seeds with lower cost": 3
+    },
+    {
+      "k": 1,
+      "method": "Per-stream thresholds",
+      "seeds": 10,
+      "\u03c4 (\u03b1 for conformal)": "",
+      "admitted (%)": "56.3 \u00b1 1.2",
+      "contamination (%)": "3.34 \u00b1 1.43",
+      "intercepted": "2.1 \u00b1 2.0",
+      "lost to gate": "1.2 \u00b1 0.9",
+      "cost / ungated": "0.98 \u00b1 0.09",
+      "seeds with lower cost": 4
+    },
+    {
+      "k": 1,
+      "method": "Conformal prediction sets (LAC)",
+      "seeds": 10,
+      "\u03c4 (\u03b1 for conformal)": "0.05 \u00b1 0.01",
+      "admitted (%)": "54.6 \u00b1 1.5",
+      "contamination (%)": "2.27 \u00b1 1.43",
+      "intercepted": "4.4 \u00b1 2.5",
+      "lost to gate": "5.0 \u00b1 3.9",
+      "cost / ungated": "1.13 \u00b1 0.32",
+      "seeds with lower cost": 3
+    },
+    {
+      "k": 1,
+      "method": "Risk-controlled \u03c4 (contamination \u2264 2%)",
+      "seeds": 10,
+      "\u03c4 (\u03b1 for conformal)": "1.01 \u00b1 0.00",
+      "admitted (%)": "0.0 \u00b1 0.0",
+      "contamination (%)": "nan \u00b1 nan",
+      "intercepted": "8.9 \u00b1 3.4",
+      "lost to gate": "197.0 \u00b1 3.8",
+      "cost / ungated": "13.00 \u00b1 2.99",
+      "seeds with lower cost": 0
+    },
+    {
+      "k": 1,
+      "method": "Deep ensemble (5 models)",
+      "seeds": 5,
+      "\u03c4 (\u03b1 for conformal)": "0.43 \u00b1 0.14",
+      "admitted (%)": "56.4 \u00b1 0.9",
+      "contamination (%)": "2.95 \u00b1 1.33",
+      "intercepted": "1.2 \u00b1 1.6",
+      "lost to gate": "1.0 \u00b1 2.2",
+      "cost / ungated": "1.04 \u00b1 0.08",
+      "seeds with lower cost": 0
+    },
+    {
+      "k": 1,
+      "method": "Max softmax, temperature-scaled (same 5 splits)",
+      "seeds": 5,
+      "\u03c4 (\u03b1 for conformal)": "0.35 \u00b1 0.20",
+      "admitted (%)": "56.5 \u00b1 1.0",
+      "contamination (%)": "3.53 \u00b1 1.65",
+      "intercepted": "1.0 \u00b1 2.2",
+      "lost to gate": "0.8 \u00b1 1.3",
+      "cost / ungated": "1.01 \u00b1 0.03",
+      "seeds with lower cost": 0
+    },
+    {
+      "k": 3,
+      "method": "Ungated",
+      "seeds": 10,
+      "\u03c4 (\u03b1 for conformal)": "",
+      "admitted (%)": "57.2 \u00b1 1.5",
+      "contamination (%)": "4.30 \u00b1 1.59",
+      "intercepted": "0.0 \u00b1 0.0",
+      "lost to gate": "0.0 \u00b1 0.0",
+      "cost / ungated": "1.00 \u00b1 0.00",
+      "seeds with lower cost": 0
+    },
+    {
+      "k": 3,
+      "method": "Max softmax, raw",
+      "seeds": 10,
+      "\u03c4 (\u03b1 for conformal)": "0.83 \u00b1 0.12",
+      "admitted (%)": "53.4 \u00b1 2.0",
+      "contamination (%)": "1.67 \u00b1 1.00",
+      "intercepted": "5.7 \u00b1 2.9",
+      "lost to gate": "8.1 \u00b1 6.2",
+      "cost / ungated": "0.78 \u00b1 0.18",
+      "seeds with lower cost": 8
+    },
+    {
+      "k": 3,
+      "method": "Max softmax, temperature-scaled",
+      "seeds": 10,
+      "\u03c4 (\u03b1 for conformal)": "0.71 \u00b1 0.11",
+      "admitted (%)": "53.5 \u00b1 2.0",
+      "contamination (%)": "1.72 \u00b1 1.10",
+      "intercepted": "5.6 \u00b1 3.0",
+      "lost to gate": "7.6 \u00b1 6.4",
+      "cost / ungated": "0.77 \u00b1 0.25",
+      "seeds with lower cost": 8
+    },
+    {
+      "k": 3,
+      "method": "Margin (top-1 \u2212 top-2)",
+      "seeds": 10,
+      "\u03c4 (\u03b1 for conformal)": "0.43 \u00b1 0.25",
+      "admitted (%)": "53.4 \u00b1 2.1",
+      "contamination (%)": "1.72 \u00b1 0.98",
+      "intercepted": "5.6 \u00b1 3.1",
+      "lost to gate": "8.1 \u00b1 6.5",
+      "cost / ungated": "0.79 \u00b1 0.20",
+      "seeds with lower cost": 8
+    },
+    {
+      "k": 3,
+      "method": "1 \u2212 normalised entropy",
+      "seeds": 10,
+      "\u03c4 (\u03b1 for conformal)": "0.37 \u00b1 0.15",
+      "admitted (%)": "53.6 \u00b1 2.8",
+      "contamination (%)": "1.88 \u00b1 1.08",
+      "intercepted": "5.2 \u00b1 3.9",
+      "lost to gate": "7.5 \u00b1 7.2",
+      "cost / ungated": "0.83 \u00b1 0.21",
+      "seeds with lower cost": 8
+    },
+    {
+      "k": 3,
+      "method": "Per-stream thresholds",
+      "seeds": 10,
+      "\u03c4 (\u03b1 for conformal)": "",
+      "admitted (%)": "53.6 \u00b1 2.1",
+      "contamination (%)": "2.02 \u00b1 0.97",
+      "intercepted": "5.0 \u00b1 4.1",
+      "lost to gate": "7.8 \u00b1 6.3",
+      "cost / ungated": "0.85 \u00b1 0.22",
+      "seeds with lower cost": 7
+    },
+    {
+      "k": 3,
+      "method": "Conformal prediction sets (LAC)",
+      "seeds": 10,
+      "\u03c4 (\u03b1 for conformal)": "0.09 \u00b1 0.06",
+      "admitted (%)": "52.8 \u00b1 2.4",
+      "contamination (%)": "1.56 \u00b1 1.03",
+      "intercepted": "5.9 \u00b1 2.9",
+      "lost to gate": "10.0 \u00b1 7.6",
+      "cost / ungated": "0.85 \u00b1 0.22",
+      "seeds with lower cost": 7
+    },
+    {
+      "k": 3,
+      "method": "Risk-controlled \u03c4 (contamination \u2264 2%)",
+      "seeds": 10,
+      "\u03c4 (\u03b1 for conformal)": "1.01 \u00b1 0.00",
+      "admitted (%)": "0.0 \u00b1 0.0",
+      "contamination (%)": "nan \u00b1 nan",
+      "intercepted": "8.9 \u00b1 3.4",
+      "lost to gate": "197.0 \u00b1 3.8",
+      "cost / ungated": "6.52 \u00b1 2.21",
+      "seeds with lower cost": 0
+    },
+    {
+      "k": 3,
+      "method": "Deep ensemble (5 models)",
+      "seeds": 5,
+      "\u03c4 (\u03b1 for conformal)": "0.67 \u00b1 0.05",
+      "admitted (%)": "54.1 \u00b1 2.0",
+      "contamination (%)": "1.74 \u00b1 0.91",
+      "intercepted": "3.8 \u00b1 1.6",
+      "lost to gate": "6.8 \u00b1 5.3",
+      "cost / ungated": "0.86 \u00b1 0.08",
+      "seeds with lower cost": 5
+    },
+    {
+      "k": 3,
+      "method": "Max softmax, temperature-scaled (same 5 splits)",
+      "seeds": 5,
+      "\u03c4 (\u03b1 for conformal)": "0.76 \u00b1 0.12",
+      "admitted (%)": "52.5 \u00b1 2.0",
+      "contamination (%)": "1.41 \u00b1 1.14",
+      "intercepted": "5.6 \u00b1 3.0",
+      "lost to gate": "10.6 \u00b1 7.3",
+      "cost / ungated": "0.85 \u00b1 0.33",
+      "seeds with lower cost": 3
+    },
+    {
+      "k": 9,
+      "method": "Ungated",
+      "seeds": 10,
+      "\u03c4 (\u03b1 for conformal)": "",
+      "admitted (%)": "57.2 \u00b1 1.5",
+      "contamination (%)": "4.30 \u00b1 1.59",
+      "intercepted": "0.0 \u00b1 0.0",
+      "lost to gate": "0.0 \u00b1 0.0",
+      "cost / ungated": "1.00 \u00b1 0.00",
+      "seeds with lower cost": 0
+    },
+    {
+      "k": 9,
+      "method": "Max softmax, raw",
+      "seeds": 10,
+      "\u03c4 (\u03b1 for conformal)": "0.91 \u00b1 0.10",
+      "admitted (%)": "51.0 \u00b1 4.1",
+      "contamination (%)": "1.10 \u00b1 0.96",
+      "intercepted": "6.8 \u00b1 4.0",
+      "lost to gate": "15.3 \u00b1 13.4",
+      "cost / ungated": "0.53 \u00b1 0.21",
+      "seeds with lower cost": 10
+    },
+    {
+      "k": 9,
+      "method": "Max softmax, temperature-scaled",
+      "seeds": 10,
+      "\u03c4 (\u03b1 for conformal)": "0.80 \u00b1 0.14",
+      "admitted (%)": "50.7 \u00b1 3.9",
+      "contamination (%)": "0.99 \u00b1 1.07",
+      "intercepted": "7.0 \u00b1 4.1",
+      "lost to gate": "16.3 \u00b1 12.7",
+      "cost / ungated": "0.52 \u00b1 0.22",
+      "seeds with lower cost": 10
+    },
+    {
+      "k": 9,
+      "method": "Margin (top-1 \u2212 top-2)",
+      "seeds": 10,
+      "\u03c4 (\u03b1 for conformal)": "0.67 \u00b1 0.24",
+      "admitted (%)": "50.4 \u00b1 3.9",
+      "contamination (%)": "1.00 \u00b1 1.02",
+      "intercepted": "7.0 \u00b1 4.0",
+      "lost to gate": "17.4 \u00b1 12.4",
+      "cost / ungated": "0.54 \u00b1 0.21",
+      "seeds with lower cost": 10
+    },
+    {
+      "k": 9,
+      "method": "1 \u2212 normalised entropy",
+      "seeds": 10,
+      "\u03c4 (\u03b1 for conformal)": "0.59 \u00b1 0.14",
+      "admitted (%)": "50.3 \u00b1 2.9",
+      "contamination (%)": "0.80 \u00b1 0.93",
+      "intercepted": "7.4 \u00b1 3.8",
+      "lost to gate": "17.2 \u00b1 10.2",
+      "cost / ungated": "0.49 \u00b1 0.23",
+      "seeds with lower cost": 10
+    },
+    {
+      "k": 9,
+      "method": "Per-stream thresholds",
+      "seeds": 10,
+      "\u03c4 (\u03b1 for conformal)": "",
+      "admitted (%)": "50.9 \u00b1 2.8",
+      "contamination (%)": "0.92 \u00b1 0.78",
+      "intercepted": "7.2 \u00b1 3.3",
+      "lost to gate": "15.3 \u00b1 8.2",
+      "cost / ungated": "0.47 \u00b1 0.16",
+      "seeds with lower cost": 10
+    },
+    {
+      "k": 9,
+      "method": "Conformal prediction sets (LAC)",
+      "seeds": 10,
+      "\u03c4 (\u03b1 for conformal)": "0.09 \u00b1 0.07",
+      "admitted (%)": "51.5 \u00b1 3.0",
+      "contamination (%)": "1.25 \u00b1 1.10",
+      "intercepted": "6.5 \u00b1 3.4",
+      "lost to gate": "14.0 \u00b1 9.6",
+      "cost / ungated": "0.56 \u00b1 0.26",
+      "seeds with lower cost": 9
+    },
+    {
+      "k": 9,
+      "method": "Risk-controlled \u03c4 (contamination \u2264 2%)",
+      "seeds": 10,
+      "\u03c4 (\u03b1 for conformal)": "1.01 \u00b1 0.00",
+      "admitted (%)": "0.0 \u00b1 0.0",
+      "contamination (%)": "nan \u00b1 nan",
+      "intercepted": "8.9 \u00b1 3.4",
+      "lost to gate": "197.0 \u00b1 3.8",
+      "cost / ungated": "2.69 \u00b1 1.23",
+      "seeds with lower cost": 0
+    },
+    {
+      "k": 9,
+      "method": "Deep ensemble (5 models)",
+      "seeds": 5,
+      "\u03c4 (\u03b1 for conformal)": "0.81 \u00b1 0.12",
+      "admitted (%)": "50.1 \u00b1 4.2",
+      "contamination (%)": "0.54 \u00b1 0.40",
+      "intercepted": "6.2 \u00b1 2.4",
+      "lost to gate": "18.8 \u00b1 12.8",
+      "cost / ungated": "0.50 \u00b1 0.18",
+      "seeds with lower cost": 5
+    },
+    {
+      "k": 9,
+      "method": "Max softmax, temperature-scaled (same 5 splits)",
+      "seeds": 5,
+      "\u03c4 (\u03b1 for conformal)": "0.88 \u00b1 0.10",
+      "admitted (%)": "48.6 \u00b1 3.5",
+      "contamination (%)": "0.44 \u00b1 0.45",
+      "intercepted": "7.4 \u00b1 4.0",
+      "lost to gate": "22.6 \u00b1 12.3",
+      "cost / ungated": "0.54 \u00b1 0.25",
+      "seeds with lower cost": 5
+    }
+  ],
+  "per_stream_taus": {
+    "1": [
+      "{\"paper\": 0.49, \"plastic\": 0.61}",
+      "{\"paper\": 0.27, \"plastic\": 0.23}",
+      "{\"paper\": 0.33, \"plastic\": 0.63}",
+      "{\"paper\": 0.51, \"plastic\": 0.21}",
+      "{\"paper\": 0.29, \"plastic\": 0.74}",
+      "{\"paper\": 0.26, \"plastic\": 0.58}",
+      "{\"paper\": 0.32, \"plastic\": 0.26}",
+      "{\"paper\": 0.6, \"plastic\": 0.51}",
+      "{\"paper\": 0.59, \"plastic\": 0.56}",
+      "{\"paper\": 0.52, \"plastic\": 0.5}"
+    ],
+    "3": [
+      "{\"paper\": 0.49, \"plastic\": 0.61}",
+      "{\"paper\": 0.81, \"plastic\": 0.85}",
+      "{\"paper\": 0.93, \"plastic\": 0.85}",
+      "{\"paper\": 0.71, \"plastic\": 0.21}",
+      "{\"paper\": 0.67, \"plastic\": 0.74}",
+      "{\"paper\": 0.71, \"plastic\": 0.85}",
+      "{\"paper\": 0.62, \"plastic\": 0.86}",
+      "{\"paper\": 0.69, \"plastic\": 0.51}",
+      "{\"paper\": 0.59, \"plastic\": 0.56}",
+      "{\"paper\": 0.56, \"plastic\": 0.61}"
+    ],
+    "9": [
+      "{\"paper\": 0.88, \"plastic\": 0.73}",
+      "{\"paper\": 0.91, \"plastic\": 0.9}",
+      "{\"paper\": 0.96, \"plastic\": 0.85}",
+      "{\"paper\": 0.88, \"plastic\": 0.72}",
+      "{\"paper\": 0.97, \"plastic\": 0.74}",
+      "{\"paper\": 0.91, \"plastic\": 0.85}",
+      "{\"paper\": 0.62, \"plastic\": 0.86}",
+      "{\"paper\": 0.69, \"plastic\": 0.62}",
+      "{\"paper\": 0.59, \"plastic\": 0.96}",
+      "{\"paper\": 0.86, \"plastic\": 0.61}"
+    ]
+  },
+  "policy_rates": {
+    "ungated": {
+      "admitted": 0.5717856151069147,
+      "contamination": 0.043224866440019424,
+      "paper_share": 0.37989447375728963,
+      "plastic_share": 0.1918911413496251,
+      "paper_contamination": 0.02850877192982456,
+      "plastic_contamination": 0.0723589001447178,
+      "pooled_items": 3601
+    },
+    "gated_k3": {
+      "admitted": 0.5351291307970009,
+      "contamination": 0.017125064867669952,
+      "paper_share": 0.3623993335184671,
+      "plastic_share": 0.17272979727853374,
+      "paper_contamination": 0.010727969348659003,
+      "plastic_contamination": 0.03054662379421222,
+      "pooled_items": 3601
+    },
+    "gated_k9": {
+      "admitted": 0.5070813662871425,
+      "contamination": 0.0104052573932092,
+      "paper_share": 0.3487920022216051,
+      "plastic_share": 0.15828936406553734,
+      "paper_contamination": 0.007165605095541401,
+      "plastic_contamination": 0.017543859649122806,
+      "pooled_items": 3601
+    }
+  },
+  "stats": {
+    "1": {
+      "contamination_reduction_pp": {
+        "mean": 1.014443607535234,
+        "ci95": [
+          -0.697940333544844,
+          2.7268275486153124
+        ],
+        "p_two_sided": 0.2130490114811435
+      },
+      "relative_cost_change": {
+        "mean": -0.020025641025641028,
+        "ci95": [
+          -0.09273328000060109,
+          0.052681997949319034
+        ],
+        "p_two_sided": 0.5487068183058352
+      },
+      "seeds_lower_cost": 3,
+      "seeds_higher_cost": 1,
+      "pooled_descriptive": {
+        "ungated_admitted": 2059,
+        "ungated_contaminants": 89,
+        "gated_admitted": 2026,
+        "gated_contaminants": 67
+      }
+    },
+    "3": {
+      "contamination_reduction_pp": {
+        "mean": 2.579427537152895,
+        "ci95": [
+          0.9018398338087057,
+          4.2570152404970845
+        ],
+        "p_two_sided": 0.006957706588204788
+      },
+      "relative_cost_change": {
+        "mean": -0.22636188553171474,
+        "ci95": [
+          -0.5387003525716287,
+          0.08597658150819923
+        ],
+        "p_two_sided": 0.1355393861502412
+      },
+      "seeds_lower_cost": 8,
+      "seeds_higher_cost": 2,
+      "pooled_descriptive": {
+        "ungated_admitted": 2059,
+        "ungated_contaminants": 89,
+        "gated_admitted": 1927,
+        "gated_contaminants": 33
+      }
+    },
+    "9": {
+      "contamination_reduction_pp": {
+        "mean": 3.311776770123675,
+        "ci95": [
+          0.9327018507770628,
+          5.690851689470287
+        ],
+        "p_two_sided": 0.011756037128983371
+      },
+      "relative_cost_change": {
+        "mean": -0.47871518835587973,
+        "ci95": [
+          -0.7520353916209803,
+          -0.20539498509077908
+        ],
+        "p_two_sided": 0.00329365781028422
+      },
+      "seeds_lower_cost": 10,
+      "seeds_higher_cost": 0,
+      "pooled_descriptive": {
+        "ungated_admitted": 2059,
+        "ungated_contaminants": 89,
+        "gated_admitted": 1826,
+        "gated_contaminants": 19
+      }
+    }
+  },
+  "n_test": 363,
+  "n_train": 1768,
+  "sweep": {
+    "k_sig_benefit_first": 4.335,
+    "k_sig_harm_last": NaN,
+    "tau_vs_theory": [
+      {
+        "k": 0.25,
+        "tau_mean": 0.331,
+        "theory": 0.2,
+        "rel_cost_mean": 1.0624761904761904
+      },
+      {
+        "k": 0.286,
+        "tau_mean": 0.331,
+        "theory": 0.22239502332814928,
+        "rel_cost_mean": 1.0547740451963454
+      },
+      {
+        "k": 0.328,
+        "tau_mean": 0.331,
+        "theory": 0.2469879518072289,
+        "rel_cost_mean": 1.0466461444596191
+      },
+      {
+        "k": 0.376,
+        "tau_mean": 0.331,
+        "theory": 0.2732558139534884,
+        "rel_cost_mean": 1.0383190391381834
+      },
+      {
+        "k": 0.43,
+        "tau_mean": 0.331,
+        "theory": 0.30069930069930073,
+        "rel_cost_mean": 1.029981300915383
+      },
+      {
+        "k": 0.493,
+        "tau_mean": 0.331,
+        "theory": 0.3302076356329538,
+        "rel_cost_mean": 1.0213977002233867
+      },
+      {
+        "k": 0.565,
+        "tau_mean": 0.40800000000000003,
+        "theory": 0.36102236421725237,
+        "rel_cost_mean": 1.0185857928204831
+      },
+      {
+        "k": 0.647,
+        "tau_mean": 0.418,
+        "theory": 0.3928354584092289,
+        "rel_cost_mean": 1.0323706900505947
+      },
+      {
+        "k": 0.741,
+        "tau_mean": 0.418,
+        "theory": 0.4256174612291786,
+        "rel_cost_mean": 1.0157106994185834
+      },
+      {
+        "k": 0.849,
+        "tau_mean": 0.418,
+        "theory": 0.4591671173607355,
+        "rel_cost_mean": 0.999260260189098
+      },
+      {
+        "k": 0.973,
+        "tau_mean": 0.418,
+        "theory": 0.49315762797769896,
+        "rel_cost_mean": 0.9831534132088077
+      },
+      {
+        "k": 1.114,
+        "tau_mean": 0.529,
+        "theory": 0.5269631031220436,
+        "rel_cost_mean": 0.9985418078163224
+      },
+      {
+        "k": 1.276,
+        "tau_mean": 0.529,
+        "theory": 0.5606326889279438,
+        "rel_cost_mean": 0.9753584182885019
+      },
+      {
+        "k": 1.462,
+        "tau_mean": 0.529,
+        "theory": 0.5938261575954509,
+        "rel_cost_mean": 0.9530154768811705
+      },
+      {
+        "k": 1.675,
+        "tau_mean": 0.651,
+        "theory": 0.6261682242990655,
+        "rel_cost_mean": 0.900960046774997
+      },
+      {
+        "k": 1.918,
+        "tau_mean": 0.651,
+        "theory": 0.6572995202193282,
+        "rel_cost_mean": 0.8626230647969196
+      },
+      {
+        "k": 2.198,
+        "tau_mean": 0.666,
+        "theory": 0.6873045653533458,
+        "rel_cost_mean": 0.8326601851206696
+      },
+      {
+        "k": 2.517,
+        "tau_mean": 0.682,
+        "theory": 0.7156667614444129,
+        "rel_cost_mean": 0.8246872158251817
+      },
+      {
+        "k": 2.884,
+        "tau_mean": 0.709,
+        "theory": 0.7425334706488157,
+        "rel_cost_mean": 0.7852994743274302
+      },
+      {
+        "k": 3.303,
+        "tau_mean": 0.721,
+        "theory": 0.767603997211248,
+        "rel_cost_mean": 0.7549864615814597
+      },
+      {
+        "k": 3.784,
+        "tau_mean": 0.7350000000000001,
+        "theory": 0.7909698996655519,
+        "rel_cost_mean": 0.7150538790410261
+      },
+      {
+        "k": 4.335,
+        "tau_mean": 0.7430000000000001,
+        "theory": 0.8125585754451734,
+        "rel_cost_mean": 0.6578798377425013
+      },
+      {
+        "k": 4.965,
+        "tau_mean": 0.7430000000000001,
+        "theory": 0.8323554065381391,
+        "rel_cost_mean": 0.6200721404090459
+      },
+      {
+        "k": 5.688,
+        "tau_mean": 0.75,
+        "theory": 0.8504784688995215,
+        "rel_cost_mean": 0.5857144030748571
+      },
+      {
+        "k": 6.516,
+        "tau_mean": 0.75,
+        "theory": 0.8669505055880787,
+        "rel_cost_mean": 0.5532930304578909
+      },
+      {
+        "k": 7.464,
+        "tau_mean": 0.764,
+        "theory": 0.8818525519848771,
+        "rel_cost_mean": 0.5333017003148951
+      },
+      {
+        "k": 8.55,
+        "tau_mean": 0.8019999999999999,
+        "theory": 0.8952879581151832,
+        "rel_cost_mean": 0.5338888754790797
+      },
+      {
+        "k": 9.794,
+        "tau_mean": 0.827,
+        "theory": 0.9073559384843431,
+        "rel_cost_mean": 0.4742809838319594
+      },
+      {
+        "k": 11.219,
+        "tau_mean": 0.8299999999999998,
+        "theory": 0.9181602422456829,
+        "rel_cost_mean": 0.44635321538420636
+      },
+      {
+        "k": 12.852,
+        "tau_mean": 0.8739999999999999,
+        "theory": 0.9278082587352007,
+        "rel_cost_mean": 0.39696841069289945
+      },
+      {
+        "k": 14.722,
+        "tau_mean": 0.8739999999999999,
+        "theory": 0.936394860704745,
+        "rel_cost_mean": 0.3658021562375347
+      },
+      {
+        "k": 16.864,
+        "tau_mean": 0.8739999999999999,
+        "theory": 0.9440214957456337,
+        "rel_cost_mean": 0.3380015827484962
+      },
+      {
+        "k": 19.318,
+        "tau_mean": 0.8739999999999999,
+        "theory": 0.9507825573383207,
+        "rel_cost_mean": 0.3132557132363296
+      },
+      {
+        "k": 22.129,
+        "tau_mean": 0.8809999999999999,
+        "theory": 0.9567642353755026,
+        "rel_cost_mean": 0.2893966566628078
+      },
+      {
+        "k": 25.349,
+        "tau_mean": 0.9,
+        "theory": 0.9620478955558086,
+        "rel_cost_mean": 0.24697612265745722
+      },
+      {
+        "k": 29.038,
+        "tau_mean": 0.9329999999999998,
+        "theory": 0.9667088354750649,
+        "rel_cost_mean": 0.24264980253691254
+      },
+      {
+        "k": 33.263,
+        "tau_mean": 0.943,
+        "theory": 0.9708139976067478,
+        "rel_cost_mean": 0.23801286467043456
+      },
+      {
+        "k": 38.104,
+        "tau_mean": 0.9564377000000001,
+        "theory": 0.9744271685761048,
+        "rel_cost_mean": 0.2234881327523202
+      },
+      {
+        "k": 43.648,
+        "tau_mean": 0.9664376999999998,
+        "theory": 0.9776025801827629,
+        "rel_cost_mean": 0.22192833881726443
+      },
+      {
+        "k": 50.0,
+        "tau_mean": 0.9664376999999998,
+        "theory": 0.9803921568627451,
+        "rel_cost_mean": 0.2019794819126775
+      }
+    ]
+  },
+  "shift": [
+    {
+      "subset": "matched classes",
+      "setting": "TrashNet-calibrated",
+      "T": "1.92 \u00b1 0.18",
+      "accuracy (%)": "50.1 \u00b1 5.0",
+      "ECE (%)": "29.1 \u00b1 6.5",
+      "ungated contamination (%)": "58.0 \u00b1 5.2",
+      "k=3: \u03c4": "0.71 \u00b1 0.11",
+      "k=9: \u03c4": "0.80 \u00b1 0.14",
+      "k=3: contamination (%)": "51.3 \u00b1 7.3",
+      "k=9: contamination (%)": "46.3 \u00b1 11.9",
+      "k=3: admitted (%)": "46.5 \u00b1 10.2",
+      "k=9: admitted (%)": "37.9 \u00b1 14.7",
+      "k=3: cost / ungated": "0.74 \u00b1 0.10",
+      "k=9: cost / ungated": "0.53 \u00b1 0.20"
+    },
+    {
+      "subset": "matched classes",
+      "setting": "recalibrated on RealWaste (oracle)",
+      "T": "7.89 \u00b1 1.96",
+      "accuracy (%)": "50.1 \u00b1 5.0",
+      "ECE (%)": "3.6 \u00b1 2.2",
+      "ungated contamination (%)": "58.0 \u00b1 5.2",
+      "k=3: \u03c4": "0.75 \u00b1 0.07",
+      "k=9: \u03c4": "0.84 \u00b1 0.07",
+      "k=3: contamination (%)": "15.0 \u00b1 4.2",
+      "k=9: contamination (%)": "8.1 \u00b1 6.6",
+      "k=3: admitted (%)": "6.4 \u00b1 2.8",
+      "k=9: admitted (%)": "2.5 \u00b1 2.2",
+      "k=3: cost / ungated": "0.39 \u00b1 0.05",
+      "k=9: cost / ungated": "0.15 \u00b1 0.02"
+    },
+    {
+      "subset": "all classes",
+      "setting": "TrashNet-calibrated",
+      "T": "1.92 \u00b1 0.18",
+      "accuracy (%)": "46.8 \u00b1 5.9",
+      "ECE (%)": "31.0 \u00b1 7.8",
+      "ungated contamination (%)": "67.8 \u00b1 4.1",
+      "k=3: \u03c4": "0.71 \u00b1 0.11",
+      "k=9: \u03c4": "0.80 \u00b1 0.14",
+      "k=3: contamination (%)": "60.5 \u00b1 7.5",
+      "k=9: contamination (%)": "54.8 \u00b1 13.4",
+      "k=3: admitted (%)": "43.9 \u00b1 11.7",
+      "k=9: admitted (%)": "35.3 \u00b1 15.5",
+      "k=3: cost / ungated": "0.68 \u00b1 0.13",
+      "k=9: cost / ungated": "0.49 \u00b1 0.22"
+    },
+    {
+      "subset": "all classes",
+      "setting": "recalibrated on RealWaste (oracle)",
+      "T": "8.30 \u00b1 2.52",
+      "accuracy (%)": "46.8 \u00b1 5.9",
+      "ECE (%)": "4.9 \u00b1 2.7",
+      "ungated contamination (%)": "67.8 \u00b1 4.1",
+      "k=3: \u03c4": "0.74 \u00b1 0.07",
+      "k=9: \u03c4": "0.83 \u00b1 0.08",
+      "k=3: contamination (%)": "16.3 \u00b1 4.1",
+      "k=9: contamination (%)": "8.5 \u00b1 6.9",
+      "k=3: admitted (%)": "4.8 \u00b1 2.4",
+      "k=9: admitted (%)": "1.9 \u00b1 1.7",
+      "k=3: cost / ungated": "0.27 \u00b1 0.03",
+      "k=9: cost / ungated": "0.10 \u00b1 0.01"
+    }
+  ],
+  "realwaste_eval_items": {
+    "matched": 3587,
+    "all": 4752,
+    "calib_frac": 0.2
+  },
+  "separation_seed0": {
+    "raw": {
+      "correct": 348,
+      "incorrect": 15,
+      "errors_above_0.96": 2
+    },
+    "cal": {
+      "correct": 348,
+      "incorrect": 15,
+      "errors_above_0.96": 1
+    }
+  },
+  "confident_errors_all_seeds": {
+    "raw": {
+      "errors": 167,
+      "above_0.96": 47
+    },
+    "cal": {
+      "errors": 167,
+      "above_0.96": 10
+    }
+  },
+  "cpu_latency_ms_seed0": 4.061672909883782
+}

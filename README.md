@@ -194,7 +194,7 @@ The sorting line is one part of a larger smart waste management concept:
 Krishna Mahajan, Ayyappan, Seenivasan and Gokulkanan — BEng (Hons) Robotics and Artificial Intelligence, University of Hertfordshire at PSB Academy, Singapore.
 Project supervisor: Hanafi, Lab Engineer (Robotics and AI), PSB Academy.
 
-Accompanying paper (draft, unpublished): *Confidence-Gated Edge Classification for Robotic Waste Sorting: Architecture, Prototype and Offline Evaluation.*
+Accompanying paper (draft, unpublished): *Cost-Sensitive Confidence Gating for Robotic Waste Sorting: Prototype, Offline Evaluation and Adaptation to Dataset Shift.*
 
 ## References
 

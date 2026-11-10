@@ -51,10 +51,10 @@ PARAMS = {
     'circuity_factor': 1.3,            # ASSUMED: road distance / straight-line distance
     'layout_seed': 42,                 # fixed hub layout for all runs
     # --- truck ---
-    'truck_capacity_L': 16000,         # Sousa et al. (2023): 16 m3 collection trucks (no compaction assumed)
+    'truck_capacity_L': 16000,         # Sousa et al. (2024): 16 m3 collection trucks (no compaction assumed)
     'truck_speed_kmh': 20.0,           # ASSUMED: urban collection speed
     'service_min_per_hub': 5.0,        # ASSUMED: time to empty one bin
-    'fuel_L_per_km': 1.004,            # Sousa et al. (2023): mean 100.40 L/100 km, waste collection trucks
+    'fuel_L_per_km': 1.004,            # Sousa et al. (2024): mean 100.40 L/100 km, waste collection trucks
     'co2_kg_per_L_diesel': 2.68,       # IPCC 2006 Vol.2 Ch.3: 74,100 kg CO2/TJ x 43.0 TJ/Gg NCV, density 0.84 kg/L (ASSUMED)
     # --- collection strategies ---
     'fixed_3x_days': (0, 2, 4),        # Mon, Wed, Fri - NEA: 660 L bins "collected at least thrice a week"

@@ -146,7 +146,7 @@ It writes `simulation/results/`: per-run results (`runs.csv`), summary tables (`
 
 Fill-based collection with co-collection nearly removes overflow compared with the 3×/week schedule, but drives about 15% further; it halves distance compared with daily collection. A station at 800 items/hour (offered load ρ ≈ 0.65) reaches a steady state; at 450 items/hour (ρ ≈ 1.16) the backlog grows without limit.
 
-**Assumptions:** every parameter is listed in `PARAMS` at the top of the script with its source (NEA, SingStat, US EPA, Sousa et al. 2023, IPCC 2006) or marked `ASSUMED`. Sorting outcomes are inputs taken from the TrashNet evaluation, so the simulation scales them to district volumes but does not validate them.
+**Assumptions:** every parameter is listed in `PARAMS` at the top of the script with its source (NEA, SingStat, US EPA, Sousa et al. 2024, IPCC 2006) or marked `ASSUMED`. Sorting outcomes are inputs taken from the TrashNet evaluation, so the simulation scales them to district volumes but does not validate them.
 
 ## The idea behind it: confidence-gated routing
 
@@ -205,3 +205,7 @@ Accompanying paper (draft, unpublished): *Confidence-Gated Edge Classification f
 5. Guo, C., Pleiss, G., Sun, Y., Weinberger, K. *On Calibration of Modern Neural Networks.* ICML.
 6. Google OR-Tools.
 7. SimPy: discrete-event simulation for Python.
+
+## License
+
+The code in this repository is released under the [MIT License](LICENSE).
